@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "725714925291",
+    "project_id": "tastypal-d0893",
+    "storage_bucket": "tastypal-d0893.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:725714925291:android:3b769384cb6d3c5d22b0ae",
+        "android_client_info": {
+          "package_name": "com.example.tastypal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpy1ENrSMCz7U2uQEcdcC-ywXSaf274oQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
