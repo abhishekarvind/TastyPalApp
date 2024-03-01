@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tastypal/auth/email_verification.dart';
 import 'package:tastypal/auth/login.dart';
 import 'package:tastypal/auth/start_screen.dart';
+import 'package:tastypal/onbarding_page.dart';
 import 'package:tastypal/utils/colors.dart';
 import 'firebase_options.dart';
 
@@ -21,9 +22,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: GetStarted(),git
+      home: OnboardingPage(),
       theme: ThemeData(
         scaffoldBackgroundColor: CustomColor.lightgreen(),
+        bottomSheetTheme: BottomSheetThemeData(backgroundColor: Colors.transparent,elevation: 0),
         textTheme: GoogleFonts.dmSansTextTheme(),
         useMaterial3: true,
       ),

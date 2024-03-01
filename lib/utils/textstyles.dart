@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tastypal/utils/colors.dart';
 
 class CustomTextStyles {
   static head(String content, double? size) {
@@ -14,7 +15,7 @@ class CustomTextStyles {
     return Text(
       content,
       style:
-          GoogleFonts.manrope(color: const Color(0xff4F7396), fontSize: size),
+          GoogleFonts.manrope(color: CustomColor.darkgreen(), fontSize: size),
       textAlign: align,
     );
   }

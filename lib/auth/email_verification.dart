@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tastypal/utils/button.dart';
 import 'package:tastypal/utils/colors.dart';
 
+import '../homescreen.dart';
 import '../utils/responsive.dart';
 import '../utils/textstyles.dart';
 
@@ -40,17 +41,11 @@ class _EmailVerificationState extends State<EmailVerification> {
 
                 ],
               ),
-              Image.asset("assets/email2.gif"),
+              Image.asset("assets/email1.gif"),
               CustomButton.button("Send Link", CustomColor.darkgreen(), Colors.white, () {
                 emailverify();
                 Fluttertoast.showToast(msg: "Sent Successfully!");
-                print(FirebaseAuth.instance.currentUser!.emailVerified);
-                if(FirebaseAuth.instance.currentUser!.emailVerified){
-                  setState(() {
-                    v=true;
-                  });
-                }
-
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const HomeScreen()));
               })
             ],
           ),
