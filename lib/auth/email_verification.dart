@@ -15,12 +15,10 @@ class EmailVerification extends StatefulWidget {
 }
 
 class _EmailVerificationState extends State<EmailVerification> {
-  bool? verified=false;
+  bool v=false;
   Future<void> emailverify()async{
     FirebaseAuth.instance.currentUser!.sendEmailVerification();
-    setState(() {
-      verified=true;
-    });
+
   }
 
   @override
@@ -42,10 +40,16 @@ class _EmailVerificationState extends State<EmailVerification> {
 
                 ],
               ),
-              verified==true?Image.asset("assets/email2.gif"):Image.asset("assets/email2.gif"),
+              Image.asset("assets/email2.gif"),
               CustomButton.button("Send Link", CustomColor.darkgreen(), Colors.white, () {
                 emailverify();
-                Fluttertoast.showToast(msg: "Added Successfully!");
+                Fluttertoast.showToast(msg: "Sent Successfully!");
+                print(FirebaseAuth.instance.currentUser!.emailVerified);
+                if(FirebaseAuth.instance.currentUser!.emailVerified){
+                  setState(() {
+                    v=true;
+                  });
+                }
 
               })
             ],

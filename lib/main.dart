@@ -4,9 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tastypal/auth/email_verification.dart';
 import 'package:tastypal/auth/login.dart';
 import 'package:tastypal/auth/start_screen.dart';
-
 import 'package:tastypal/utils/colors.dart';
-
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -23,7 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const EmailVerification(),
+      home: GetStarted(),git
       theme: ThemeData(
         scaffoldBackgroundColor: CustomColor.lightgreen(),
         textTheme: GoogleFonts.dmSansTextTheme(),

@@ -1,8 +1,7 @@
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:lottie/lottie.dart';
+import 'package:tastypal/auth/forgot_password.dart';
 import 'package:tastypal/auth/signup.dart';
 import 'package:tastypal/homescreen.dart';
 import 'package:tastypal/utils/auth_methods.dart';
@@ -62,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
                       TextFormField(
                         controller: emailcontroller,
                         decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(20),
+                          contentPadding: const EdgeInsets.all(20),
                             filled: true,
                             fillColor: CustomColor.mildgreen(),
                             hintText: 'Email address',
@@ -105,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                         },
                         obscureText: true,
                         decoration: InputDecoration(
-                            contentPadding: EdgeInsets.all(20),
+                            contentPadding: const EdgeInsets.all(20),
                             hintText: "Password",
                             hintStyle:
                                 TextStyle(color: CustomColor.darkgreen()),
@@ -121,8 +120,12 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 height: AppMediaQuery.screenHeight(context) / 60,
               ),
-              CustomTextStyles.subtext("Forgot password?",
-                  AppMediaQuery.textFactor(context) * 14, null),
+              GestureDetector(
+                onTap: (){
+                  Navigator.push((context), MaterialPageRoute(builder: (context)=>const ForgotPage()));
+                },
+                child:CustomTextStyles.subtext("Forgot password?",
+                  AppMediaQuery.textFactor(context) * 14, null),),
               SizedBox(
                 height: AppMediaQuery.screenHeight(context) / 30,
               ),
@@ -150,9 +153,9 @@ class _LoginPageState extends State<LoginPage> {
               Center(
                 child: GestureDetector(
                   onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>SignUp()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>const SignUp()));
                   },
-                  child: RichText(text: TextSpan(
+                  child: RichText(text: const TextSpan(
                     children: [
                       TextSpan(text: "Don’t have an account ",style: TextStyle(
                         decoration: TextDecoration.underline,

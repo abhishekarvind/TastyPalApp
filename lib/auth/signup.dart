@@ -85,7 +85,7 @@ class _SignUpState extends State<SignUp> {
                       TextFormField(
                         controller: emailcontroller,
                         decoration: InputDecoration(
-                            contentPadding: EdgeInsets.all(20),
+                            contentPadding: const EdgeInsets.all(20),
                             filled: true,
                             fillColor: CustomColor.mildgreen(),
                             hintText: 'Email address',
@@ -159,7 +159,7 @@ class _SignUpState extends State<SignUp> {
                         },
                         obscureText: true,
                         decoration: InputDecoration(
-                            contentPadding: EdgeInsets.all(20),
+                            contentPadding: const EdgeInsets.all(20),
                             hintText: "Confirm Password",
                             hintStyle:
                                 TextStyle(color: CustomColor.darkgreen()),

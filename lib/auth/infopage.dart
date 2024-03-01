@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:tastypal/auth/email_verification.dart';
 import 'package:tastypal/utils/button.dart';
 import 'package:tastypal/utils/colors.dart';
 import 'package:tastypal/utils/responsive.dart';
@@ -26,6 +27,7 @@ class _InfopageState extends State<Infopage> {
     await FirebaseFirestore.instance.collection("users").doc(user).update(
         {'Date of birth': dob, 'Sex': sex, 'Weight': weight, 'Height': height});
     Fluttertoast.showToast(msg: "Added Successfully!");
+
   }
 
   @override
@@ -73,7 +75,7 @@ class _InfopageState extends State<Infopage> {
                             textInputAction: TextInputAction.next,
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
-                                contentPadding: EdgeInsets.all(20),
+                                contentPadding: const EdgeInsets.all(20),
                                 filled: true,
                                 fillColor: CustomColor.mildgreen(),
                                 hintText: 'Date of Birth',
@@ -106,7 +108,7 @@ class _InfopageState extends State<Infopage> {
                             controller: sex,
                             textInputAction: TextInputAction.next,
                             decoration: InputDecoration(
-                                contentPadding: EdgeInsets.all(20),
+                                contentPadding: const EdgeInsets.all(20),
                                 filled: true,
                                 fillColor: CustomColor.mildgreen(),
                                 hintText: 'Sex',
@@ -140,7 +142,7 @@ class _InfopageState extends State<Infopage> {
                             textInputAction: TextInputAction.next,
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
-                                contentPadding: EdgeInsets.all(20),
+                                contentPadding: const EdgeInsets.all(20),
                                 filled: true,
                                 fillColor: CustomColor.mildgreen(),
                                 hintText: 'Weight',
@@ -174,7 +176,7 @@ class _InfopageState extends State<Infopage> {
                             textInputAction: TextInputAction.next,
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
-                                contentPadding: EdgeInsets.all(20),
+                                contentPadding: const EdgeInsets.all(20),
                                 filled: true,
                                 fillColor: CustomColor.mildgreen(),
                                 hintText: 'Height',
@@ -203,6 +205,8 @@ class _InfopageState extends State<Infopage> {
                               CustomColor.darkgreen(), Colors.white, () {
                             addinfo(dob.text.trim(), height.text.trim(),
                                 weight.text.trim(), sex.text.trim());
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>const EmailVerification()));
+
                           })
                         ],
                       ),
