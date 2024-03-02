@@ -37,6 +37,21 @@ class _InfopageState extends State<Infopage> {
     });
     super.initState();
   }
+  DateTime dateTime =DateTime.now();
+
+  void date() {
+    showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(1900),
+        lastDate: DateTime(2030))
+        .then((value) {
+      setState(() {
+        dateTime = value!;
+        dob.text = '${dateTime!.day}/${dateTime!.month}/${dateTime!.year}';
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,11 +89,13 @@ class _InfopageState extends State<Infopage> {
                             controller: dob,
                             textInputAction: TextInputAction.next,
                             keyboardType: TextInputType.number,
+                            showCursor: false,
+                            onTap: date,
                             decoration: InputDecoration(
                                 contentPadding: const EdgeInsets.all(20),
                                 filled: true,
                                 fillColor: CustomColor.mildgreen(),
-                                hintText: 'Date of Birth',
+                                hintText: 'MM/DD/YY',
                                 hintStyle:
                                     TextStyle(color: CustomColor.darkgreen()),
                                 border: OutlineInputBorder(
@@ -133,7 +150,7 @@ class _InfopageState extends State<Infopage> {
                           SizedBox(
                             height: AppMediaQuery.screenHeight(context) / 60,
                           ),
-                          CustomTextStyles.head("Weight", 14),
+                          CustomTextStyles.head("Weight(kg)", 14),
                           SizedBox(
                             height: AppMediaQuery.screenHeight(context) / 70,
                           ),
@@ -167,7 +184,7 @@ class _InfopageState extends State<Infopage> {
                           SizedBox(
                             height: AppMediaQuery.screenHeight(context) / 60,
                           ),
-                          CustomTextStyles.head("Height", 14),
+                          CustomTextStyles.head("Height(cm)", 14),
                           SizedBox(
                             height: AppMediaQuery.screenHeight(context) / 70,
                           ),
@@ -205,7 +222,7 @@ class _InfopageState extends State<Infopage> {
                               CustomColor.darkgreen(), Colors.white, () {
                             addinfo(dob.text.trim(), height.text.trim(),
                                 weight.text.trim(), sex.text.trim());
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>const EmailVerification()));
+                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const EmailVerification()));
 
                           })
                         ],

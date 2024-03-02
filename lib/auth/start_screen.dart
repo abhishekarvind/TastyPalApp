@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tastypal/auth/login.dart';
+import 'package:tastypal/homescreen.dart';
 import 'package:tastypal/utils/button.dart';
 import 'package:tastypal/utils/colors.dart';
 import 'package:tastypal/utils/responsive.dart';
@@ -12,6 +14,7 @@ class GetStarted extends StatefulWidget {
 }
 
 class _GetStartedState extends State<GetStarted> {
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(

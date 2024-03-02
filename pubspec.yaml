@@ -42,6 +42,9 @@ dependencies:
   fluttertoast: ^8.2.4
   image_picker: ^1.0.7
   lottie: ^3.1.0
+  glassmorphism: ^3.0.0
+  flutter_native_splash: ^2.3.10
+
 
 
 dev_dependencies:
@@ -55,10 +58,19 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^3.0.0
 
+
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
+
+
+
+
+
+
+
 flutter:
 
   # The following line ensures that the Material Icons font is
@@ -67,6 +79,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
+
 
   # To add assets to your application, add an assets section, like this:
   # assets:

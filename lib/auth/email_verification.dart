@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:tastypal/onbarding_page.dart';
 import 'package:tastypal/utils/button.dart';
 import 'package:tastypal/utils/colors.dart';
 
@@ -45,7 +46,7 @@ class _EmailVerificationState extends State<EmailVerification> {
               CustomButton.button("Send Link", CustomColor.darkgreen(), Colors.white, () {
                 emailverify();
                 Fluttertoast.showToast(msg: "Sent Successfully!");
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const HomeScreen()));
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const OnboardingPage()));
               })
             ],
           ),
