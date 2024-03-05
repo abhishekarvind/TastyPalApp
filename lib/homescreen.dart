@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tastypal/profile_page.dart';
+import 'package:tastypal/scan_page.dart';
 import 'package:tastypal/utils/colors.dart';
 import 'package:tastypal/utils/responsive.dart';
 import 'package:tastypal/utils/textstyles.dart';
@@ -20,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: FloatingActionButton.extended(onPressed: (){
-          Navigator.push(context,MaterialPageRoute(builder: (context)=>HomeScreen()) );
+          Navigator.push(context,MaterialPageRoute(builder: (context)=>ScanPage()) );
         },
           backgroundColor: CustomColor.darkgreen(), label: Padding(
             padding: const EdgeInsets.all(20.0),

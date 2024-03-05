@@ -44,6 +44,7 @@ dependencies:
   lottie: ^3.1.0
   glassmorphism: ^3.0.0
   flutter_native_splash: ^2.3.10
+  google_ml_vision: ^0.0.8
 
 
 

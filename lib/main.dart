@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: FirebaseAuth.instance.currentUser != null?HomeScreen():GetStarted(),
       theme: ThemeData(
+        dialogBackgroundColor:  CustomColor.lightgreen(),
         scaffoldBackgroundColor: CustomColor.lightgreen(),
         bottomSheetTheme: BottomSheetThemeData(backgroundColor: Colors.transparent,elevation: 0),
         textTheme: GoogleFonts.dmSansTextTheme(),

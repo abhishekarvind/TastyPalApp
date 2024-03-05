@@ -29,9 +29,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 .doc(FirebaseAuth.instance.currentUser?.uid )
                 .snapshots(),
             builder: (context,AsyncSnapshot snapshot){
-              if(snapshot.hasData){
+              if(!snapshot.hasData){
                 Center(
-                  child: Image.asset("assest/loading.gif"),
+                  child: Image.asset("asset/loading.gif"),
                 );
               }
               return Column(
