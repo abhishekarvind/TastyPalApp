@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tastypal/auth/allergy_page.dart';
+import 'package:tastypal/auth/edit_profile_page.dart';
 import 'package:tastypal/auth/email_verification.dart';
 import 'package:tastypal/auth/login.dart';
 import 'package:tastypal/auth/start_screen.dart';

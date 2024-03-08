@@ -24,11 +24,6 @@ class _ScanPageState extends State<ScanPage> {
   late String answer = '';
 
   Future<void> detect(String userContent) async {
-    if (userContent == null) {
-      // Handle the case when userContent is null (you might want to return early or provide a default value)
-      return;
-    }
-
     final http.Response response = await http.post(
       Uri.parse('http://192.168.1.7:5000/get_openai_response'),
       headers: {'Content-Type': 'application/json'},

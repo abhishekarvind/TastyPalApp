@@ -75,7 +75,7 @@ class _SignUpState extends State<SignUp> {
                         return null;
                       },
                       onSaved: (value) {
-                        emailcontroller.text = value!;
+                        namecontroller.text = value!;
                       },
                     ),
                     SizedBox(

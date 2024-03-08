@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:tastypal/auth/edit_profile_page.dart';
 import 'package:tastypal/auth/start_screen.dart';
 import 'package:tastypal/utils/auth_methods.dart';
 import 'package:tastypal/utils/button.dart';
@@ -30,9 +31,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 .snapshots(),
             builder: (context,AsyncSnapshot snapshot){
               if(!snapshot.hasData){
-                Center(
-                  child: Image.asset("asset/loading.gif"),
-                );
+                return Center(
+                    heightFactor: AppMediaQuery.screenHeight(context)/130,
+                    child: Image.asset("assets/loading.gif",));
               }
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,8 +52,12 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   CustomTextStyles.head(
                       "Allergies", AppMediaQuery.textFactor(context) * 28),
-                  const SizedBox(height: 200,),
-                  CustomButton.button('Edit Profile', CustomColor.darkgreen(), Colors.white, () { }),
+                  Padding(padding:EdgeInsets.symmetric(horizontal: AppMediaQuery.screenWidth(context)/14) ,child: CustomTextStyles.subtext(snapshot.data['Allergies'], AppMediaQuery.textFactor(context)*26,TextAlign.start))
+                  ,const SizedBox(height: 200,),
+                  CustomButton.button('Edit Profile', CustomColor.darkgreen(), Colors.white, () {
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const EditProfile()));
+
+                  }),
                   CustomButton.button('Log out', const Color(0xffFF4545), Colors.white, () {
                     AuthMethods().signOut();
                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const GetStarted()));

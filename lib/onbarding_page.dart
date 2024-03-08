@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tastypal/auth/allergy_page.dart';
 import 'package:tastypal/homescreen.dart';
 import 'package:tastypal/utils/button.dart';
 import 'package:tastypal/utils/colors.dart';
@@ -65,10 +66,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
               child: ElevatedButton(
                 onPressed: (){
                   if(currentindex!=2){
-                    pageController.nextPage(duration: Duration(milliseconds: 1000),
+                    pageController.nextPage(duration: Duration(milliseconds: 400),
                         curve: Curves.easeIn);
                   }else{
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>AllergyPage()));
                   }
                 },
                 style: ElevatedButton.styleFrom(

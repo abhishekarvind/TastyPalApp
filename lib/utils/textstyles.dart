@@ -7,7 +7,7 @@ class CustomTextStyles {
     return Text(
       content,
       style: GoogleFonts.manrope(
-          color: Colors.black, fontSize: size, fontWeight: FontWeight.w900),
+          color: CustomColor.darkgreen(), fontSize: size, fontWeight: FontWeight.w900),
     );
   }
 
