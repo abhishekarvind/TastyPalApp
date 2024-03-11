@@ -5,7 +5,6 @@ import 'package:tastypal/onbarding_page.dart';
 import 'package:tastypal/utils/button.dart';
 import 'package:tastypal/utils/colors.dart';
 
-import '../homescreen.dart';
 import '../utils/responsive.dart';
 import '../utils/textstyles.dart';
 

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:tastypal/auth/create_username.dart';
 import 'package:tastypal/auth/email_verification.dart';
 import 'package:tastypal/utils/button.dart';
 import 'package:tastypal/utils/colors.dart';
@@ -222,7 +223,7 @@ class _InfopageState extends State<Infopage> {
                               CustomColor.darkgreen(), Colors.white, () {
                             addinfo(dob.text.trim(), height.text.trim(),
                                 weight.text.trim(), sex.text.trim());
-                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const EmailVerification()));
+                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const CreateUsername()));
 
                           })
                         ],
