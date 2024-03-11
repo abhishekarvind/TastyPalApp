@@ -17,7 +17,12 @@ class onboarding{
       'title':"Find Your Flavor",
       'content':"Browse through a variety of dishes, discover new flavors, and embark on a delightful culinary adventure.",
       'image':"assets/ob3.png"
-    }
+    },
+    {
+      'title':"HealthyBites",
+      'content':"Community forum to discover and share nutritious recipes, wellness insights, and healthy eating habits.",
+      'image':"assets/ob4.png"
+    },
   ];
 
 }
