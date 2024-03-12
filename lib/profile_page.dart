@@ -20,11 +20,8 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(child: Scaffold(
-      appBar: AppBar(
-        backgroundColor: CustomColor.lightgreen(),
-      ),
       body: Padding(
-        padding:EdgeInsets.symmetric(vertical: AppMediaQuery.screenHeight(context)/40,horizontal: AppMediaQuery.screenWidth(context)/25),
+        padding:EdgeInsets.symmetric(vertical: AppMediaQuery.screenHeight(context)/30,horizontal: AppMediaQuery.screenWidth(context)/25),
         child: StreamBuilder(
             stream: FirebaseFirestore.instance.collection("users")
                 .doc(FirebaseAuth.instance.currentUser?.uid )
@@ -35,38 +32,46 @@ class _ProfilePageState extends State<ProfilePage> {
                     heightFactor: AppMediaQuery.screenHeight(context)/130,
                     child: Image.asset("assets/loading.gif",));
               }
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CustomTextStyles.head(
-                      "Profile", AppMediaQuery.textFactor(context) * 28),
-                  card("Name", snapshot.data['name'].toString()),
-                  card("Date of Birth", snapshot.data['Date of birth'].toString()),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      card('Height',"${snapshot.data['Height']} cm"),
-                      card('Weight',"${snapshot.data['Weight']} kg")
-                    ],
-                  ),
-                  CustomTextStyles.head(
-                      "Allergies", AppMediaQuery.textFactor(context) * 28),
-                  Padding(padding:EdgeInsets.symmetric(horizontal: AppMediaQuery.screenWidth(context)/14) ,child: CustomTextStyles.subtext(snapshot.data['Allergies'], AppMediaQuery.textFactor(context)*26,TextAlign.start))
-                  ,const SizedBox(height: 200,),
-                  CustomButton.button('Edit Profile', CustomColor.darkgreen(), Colors.white, () {
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const EditProfile()));
-
-                  }),
-                  CustomButton.button('Log out', const Color(0xffFF4545), Colors.white, () {
-                    AuthMethods().signOut();
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const GetStarted()));
-                  }),
-
-
-
-                ],
-
+              return SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Image.asset('assets/logo.png',height: 50,),
+                    SizedBox(height: AppMediaQuery.screenHeight(context)/20,),
+                    CustomTextStyles.head(
+                        "Profile", AppMediaQuery.textFactor(context) * 28),
+                    SizedBox(height: AppMediaQuery.screenHeight(context)/20,),
+                    card("Name", snapshot.data['name'].toString()),
+                    SizedBox(height: AppMediaQuery.screenHeight(context)/40,),
+                    card("Date of Birth", snapshot.data['Date of birth'].toString()),
+                    SizedBox(height: AppMediaQuery.screenHeight(context)/40,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        card('Height',"${snapshot.data['Height']} cm"),
+                        card('Weight',"${snapshot.data['Weight']} kg")
+                      ],
+                    ),
+                    SizedBox(height: AppMediaQuery.screenHeight(context)/40,),
+                    CustomTextStyles.head(
+                        "Allergies", AppMediaQuery.textFactor(context) * 28),
+                    Padding(padding:EdgeInsets.symmetric(horizontal: AppMediaQuery.screenWidth(context)/14) ,child: CustomTextStyles.subtext(snapshot.data['Allergies'], AppMediaQuery.textFactor(context)*22,TextAlign.start))
+                    ,const SizedBox(height: 200,),
+                    CustomButton.button('Edit Profile', CustomColor.darkgreen(), Colors.white, () {
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const EditProfile()));
+                
+                    }),
+                    SizedBox(height: AppMediaQuery.screenHeight(context)/40,),
+                    CustomButton.button('Log out', const Color(0xffFF4545), Colors.white, () {
+                      AuthMethods().signOut();
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const GetStarted()));
+                    }),
+                
+                
+                
+                  ],
+                
+                ),
               );
             }
 
@@ -80,7 +85,7 @@ class _ProfilePageState extends State<ProfilePage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomTextStyles.subtext(title,AppMediaQuery.textFactor(context)*18,TextAlign.end),
-        Padding(padding:EdgeInsets.symmetric(horizontal: AppMediaQuery.screenWidth(context)/14) ,child: CustomTextStyles.head(content, AppMediaQuery.textFactor(context)*26),)
+        Padding(padding:EdgeInsets.symmetric(horizontal: AppMediaQuery.screenWidth(context)/12) ,child: CustomTextStyles.head(content, AppMediaQuery.textFactor(context)*26),)
       ],
     );
   }

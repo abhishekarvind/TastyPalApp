@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tastypal/auth/forgot_password.dart';
 import 'package:tastypal/auth/signup.dart';
 import 'package:tastypal/homescreen.dart';
+import 'package:tastypal/main_homescreen.dart';
 import 'package:tastypal/utils/auth_methods.dart';
 import 'package:tastypal/utils/button.dart';
 import 'package:tastypal/utils/colors.dart';
@@ -27,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
     Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
-          builder: (context) => const HomeScreen(),
+          builder: (context) => const Mainhome()
         ),
         (route) => false);
   }

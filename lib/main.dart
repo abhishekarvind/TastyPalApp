@@ -2,13 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tastypal/auth/allergy_page.dart';
-import 'package:tastypal/auth/edit_profile_page.dart';
-import 'package:tastypal/auth/email_verification.dart';
-import 'package:tastypal/auth/login.dart';
 import 'package:tastypal/auth/start_screen.dart';
-import 'package:tastypal/homescreen.dart';
-import 'package:tastypal/onbarding_page.dart';
+import 'package:tastypal/heatlybites/lib/post_screen.dart';
+import 'package:tastypal/main_homescreen.dart';
 import 'package:tastypal/utils/colors.dart';
 import 'firebase_options.dart';
 
@@ -26,11 +22,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: FirebaseAuth.instance.currentUser != null?HomeScreen():GetStarted(),
+      home: FirebaseAuth.instance.currentUser != null?const Mainhome():const GetStarted(),
       theme: ThemeData(
         dialogBackgroundColor:  CustomColor.lightgreen(),
         scaffoldBackgroundColor: CustomColor.lightgreen(),
-        bottomSheetTheme: BottomSheetThemeData(backgroundColor: Colors.transparent,elevation: 0),
+        bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Colors.transparent,elevation: 0),
         textTheme: GoogleFonts.dmSansTextTheme(),
         useMaterial3: true,
       ),

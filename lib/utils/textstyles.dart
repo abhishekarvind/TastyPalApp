@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tastypal/utils/colors.dart';
+import 'package:tastypal/utils/responsive.dart';
 
 class CustomTextStyles {
   static head(String content, double? size) {

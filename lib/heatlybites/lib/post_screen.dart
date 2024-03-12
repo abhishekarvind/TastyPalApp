@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tastypal/heatlybites/lib/community_page.dart';
+import 'package:tastypal/main_homescreen.dart';
 import 'package:tastypal/utils/button.dart';
 import 'package:tastypal/utils/colors.dart';
 
@@ -28,18 +29,29 @@ class _PostScreenState extends State<PostScreen> {
     // TODO: implement initState
     super.initState();
     user=FirebaseAuth.instance.currentUser!.uid;
+    getdata();
   }
+  String? username;
+  Future<void>getdata()async{
+    DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance.collection('users').doc(user).get();
+    setState(() {
+      username=documentSnapshot.get('username');
+    });
+
+  }
+
 
   void createpost()async{
     FirebaseFirestore.instance.collection('posts').add({
+      'username':username,
       'user_id':user,
       'title':title.text.trim(),
       'description':description.text.trim(),
-      'date':date.hour,
+      'date':date.hour+date.minute,
       'type':"general"
 
     }).whenComplete(() => Fluttertoast.showToast(msg: "Posted"));
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>CommunityPage()));
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Mainhome()));
   }
 
   @override

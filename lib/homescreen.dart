@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:tastypal/profile_page.dart';
 import 'package:tastypal/scan_page.dart';
+import 'package:tastypal/select_page.dart';
 import 'package:tastypal/utils/colors.dart';
 import 'package:tastypal/utils/responsive.dart';
 import 'package:tastypal/utils/textstyles.dart';
@@ -19,20 +22,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: FloatingActionButton.extended(onPressed: (){
-          Navigator.push(context,MaterialPageRoute(builder: (context)=>ScanPage()) );
-        },
-          backgroundColor: CustomColor.darkgreen(), label: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Text("Scan Label",style: TextStyle(
-                fontWeight: FontWeight.bold,color: CustomColor.lightgreen(),fontSize: AppMediaQuery.textFactor(context)*18
-              ),),
-          ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30)
-          ),
-        ),
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.transparent,
@@ -40,26 +29,64 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.all(4.0),
             child: Image.asset('assets/logo.png'),
           ),
-          actions: [
-            GestureDetector(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfilePage()));
-              },
-                child: Icon(Icons.account_circle_outlined,size:50,color: CustomColor.darkgreen(),))
-
-          ],
           toolbarHeight: 90,
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal:AppMediaQuery.screenWidth(context)/35),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CustomTextStyles.head(
-                  "Home", AppMediaQuery.textFactor(context) * 28),
-              CustomTextStyles.subtext("Here is your personalized food", AppMediaQuery.textFactor(context)*18, TextAlign.start),
-              
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustomTextStyles.head(
+                    "Home", AppMediaQuery.textFactor(context) * 28),
+                SizedBox(height: AppMediaQuery.screenHeight(context)/30,),
+                SizedBox(
+                  width: AppMediaQuery.screenWidth(context),
+                  child: Card(
+                  color: CustomColor.mildgreen(),
+                  margin: EdgeInsets.all(10),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          width: AppMediaQuery.screenWidth(context)/2,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CustomTextStyles.head(
+                                  "HealthyBites", AppMediaQuery.textFactor(context) * 24),
+                              SizedBox(height: AppMediaQuery.screenHeight(context)/50,),
+                              CustomTextStyles.subtext("Easily discover delicious recipes based on the ingredients you have on hand. ", 16.0, TextAlign.start),
+                              SizedBox(height: AppMediaQuery.screenHeight(context)/50,),
+                              ElevatedButton(onPressed: (){
+                                PersistentNavBarNavigator.pushNewScreen(context, screen: SelectPage(),
+                                    pageTransitionAnimation: PageTransitionAnimation.slideRight
+                                );
+                              },
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: CustomColor.darkgreen(),
+                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text("Open",style: TextStyle(color: Colors.white),),
+                                  ))
+                            ],
+                          ),
+                        ),
+                        Image.asset('assets/chef.png',height: 140,)
+                      ],
+                    ),
+                  )
+                            ),
+                ),
+                SizedBox(height: AppMediaQuery.screenHeight(context)/40,),
+                CustomTextStyles.subtext("Here is your personalized food", AppMediaQuery.textFactor(context)*18, TextAlign.start),
+
+              ],
+            ),
           ),
         ),
       ),
