@@ -23,7 +23,7 @@ class _RecipePageState extends State<RecipePage> {
       'prompt':'Act as a Indian chef ,When prompted with ingredients or the items present in kitchen . You should suggest food item that could be cooked with these ingredients'+widget.selected.toString()
           + 'in the below format\n'+'Title\n'
       'Description\n'
-      'Recipe'+'make the content short and easy to ready give it in a proper format'
+      'Recipe'+'make the content short and easy to ready give it in a proper format and make the content short an precise'
     };
     http.Response response= await http.post(
       Uri.parse('http://192.168.1.7:5000/get_openai_response'),
@@ -70,11 +70,16 @@ class _RecipePageState extends State<RecipePage> {
                       "Here is your recipe", AppMediaQuery.textFactor(context) * 24),
                   SizedBox(height: AppMediaQuery.screenHeight(context)/40,),
                   Center(child: Image.asset('assets/cook.png',height: 180,)),
+                  SizedBox(height: AppMediaQuery.screenHeight(context)/40,),
                   Card(
                     color: CustomColor.mildgreen(),
-                    child: Padding(
-                      padding: EdgeInsets.all(10),
-                      child: CustomTextStyles.subtext(generated_content,18.0,TextAlign.start),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(10),
+                          child: CustomTextStyles.subtext(generated_content,18.0,TextAlign.start),
+                        ),
+                      ],
                     )
                   )
               

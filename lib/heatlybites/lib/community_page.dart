@@ -65,6 +65,7 @@ class _CommunityPageState extends State<CommunityPage> {
                           itemBuilder: (BuildContext context,index){
                           return Card(
                             color: CustomColor.mildgreen(),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                             margin: const EdgeInsets.all(10),
                             child: Padding(
                               padding: const EdgeInsets.all(20.0),

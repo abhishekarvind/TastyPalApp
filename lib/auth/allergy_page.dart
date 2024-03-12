@@ -77,7 +77,7 @@ class _AllergyPageState extends State<AllergyPage> {
                         elevation: 3,
                         borderRadius: BorderRadius.circular(30),
                         height: 50,
-                        padding: EdgeInsets.all(15),
+                        padding: const EdgeInsets.all(15),
                         selectedStyle: C2ChipStyle.filled(color: CustomColor.darkgreen())),
                     onChanged: (val) => setState(() => selectedValue = val),
                   choiceItems: C2Choice.listFrom(source: unique_allergens,

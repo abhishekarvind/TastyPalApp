@@ -1,6 +1,5 @@
 import "package:firebase_auth/firebase_auth.dart";
 import"package:flutter/material.dart";
-import "package:google_nav_bar/google_nav_bar.dart";
 import "package:persistent_bottom_nav_bar/persistent_tab_view.dart";
 import "package:tastypal/heatlybites/lib/community_page.dart";
 import "package:tastypal/homescreen.dart";
@@ -37,7 +36,8 @@ class _MainhomeState extends State<Mainhome> {
 
   @override
   Widget build(BuildContext context) {
-    return PersistentTabView(context,
+    return PersistentTabView(
+      context,
         screens: [
           const HomeScreen(),
           const ScanPage(),

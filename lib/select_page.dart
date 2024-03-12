@@ -41,6 +41,12 @@ class _SelectPageState extends State<SelectPage> {
     });
   }
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    selected.clear();
+  }
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
@@ -51,6 +57,9 @@ class _SelectPageState extends State<SelectPage> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           PersistentNavBarNavigator.pushNewScreen(context, screen: RecipePage(selected: selected));
+          setState(() {
+            selected.clear();
+          });
           },
         backgroundColor: CustomColor.darkgreen(),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
@@ -84,6 +93,7 @@ class _SelectPageState extends State<SelectPage> {
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50),
                                 side: selected.contains(ingredients[index])?BorderSide(color: CustomColor.darkgreen(),width: 3):BorderSide.none
                               ),
+
                               color: CustomColor.mildgreen(),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
