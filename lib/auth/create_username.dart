@@ -28,7 +28,7 @@ class _CreateUsernameState extends State<CreateUsername> {
   }
 
   Future<void>createuser(String username)async{
-    FirebaseFirestore.instance.collection('users').doc(user).set({
+    FirebaseFirestore.instance.collection('users').doc(user).update({
       'username':username
     });
   }
@@ -37,42 +37,49 @@ class _CreateUsernameState extends State<CreateUsername> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CustomTextStyles.head("Create User",
-                AppMediaQuery.textFactor(context) * 28),
-            TextFormField(
-              controller: username,
-              decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.all(20),
-                  filled: true,
-                  fillColor: CustomColor.mildgreen(),
-                  hintText: 'Username',
-                  hintStyle:
-                  TextStyle(color: CustomColor.darkgreen()),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(40),
-                      borderSide: const BorderSide(
-                        style: BorderStyle.none,
-                        width: 0,
-                      ))),
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return ("Please enter your email");
-                }
-                return null;
-                // reg expression for email validation
-              },
-              onSaved: (value) {
-                username.text = value!;
-              },
-            ),
-    CustomButton.button("Create", CustomColor.darkgreen(), Colors.white, () {
-      createuser(username.text.trim());
-      Fluttertoast.showToast(msg: "Created Successfully!");
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>EmailVerification()));
-    })    ],
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal:AppMediaQuery.screenWidth(context)/20,vertical: AppMediaQuery.screenHeight(context)/10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(height: AppMediaQuery.screenHeight(context)/20,),
+              CustomTextStyles.head("Create User",
+                  AppMediaQuery.textFactor(context) * 28),
+              TextFormField(
+                controller: username,
+                decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.all(20),
+                    filled: true,
+                    fillColor: CustomColor.mildgreen(),
+                    hintText: 'Username',
+                    hintStyle:
+                    TextStyle(color: CustomColor.darkgreen()),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(40),
+                        borderSide: const BorderSide(
+                          style: BorderStyle.none,
+                          width: 0,
+                        ))),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return ("Please enter your email");
+                  }
+                  return null;
+                  // reg expression for email validation
+                },
+                onSaved: (value) {
+                  username.text = value!;
+                },
+              ),
+              CustomButton.button("Create", CustomColor.darkgreen(), Colors.white, () {
+                createuser(username.text.trim());
+                Fluttertoast.showToast(msg: "Created Successfully!");
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>EmailVerification()));
+              }),
+              SizedBox(height: AppMediaQuery.screenHeight(context)/30,),
+            ],
+          ),
         ),
       ),
     );

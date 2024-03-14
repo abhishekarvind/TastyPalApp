@@ -1,8 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:tastypal/main_homescreen.dart';
 import 'package:tastypal/utils/button.dart';
 import 'package:tastypal/utils/colors.dart';
 
-import '../utils/recommendation_model.dart';
+import '../utils/recommendation_question_model.dart';
 import '../utils/responsive.dart';
 import '../utils/textstyles.dart';
 
@@ -16,6 +20,18 @@ class QuestionPage extends StatefulWidget {
 class _QuestionPageState extends State<QuestionPage> {
   List selected = [];
   PageController pageController =PageController();
+  String? user;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    user=FirebaseAuth.instance.currentUser!.uid;
+  }
+  Future<void> addinfo() async {
+    await FirebaseFirestore.instance.collection("users").doc(user).update(
+        {'user_preferences':selected.toString().replaceAll("[", "").replaceAll("]","")});
+    Fluttertoast.showToast(msg: "Added Successfully!");
+  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -70,7 +86,12 @@ class _QuestionPageState extends State<QuestionPage> {
                         }),
                   ),
                   CustomButton.button(index==Question.data.length-1?"Done":"Next", CustomColor.darkgreen(),Colors.white, () {
+                    if(index==Question.data.length-1){
+                      addinfo();
+                      Navigator.pushReplacement((context), MaterialPageRoute(builder: (context)=>Mainhome()));
+                    }
                     pageController.nextPage(duration: Duration(milliseconds: 300), curve: Curves.easeIn);
+
                   })
                 ],
               ),

@@ -57,7 +57,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextButton(onPressed: (){
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const HomeScreen()));
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const AllergyPage()));
             }, child: CustomTextStyles.subtext(currentindex!=3?"Skip":"", AppMediaQuery.textFactor(context)*18, TextAlign.left)),
             SizedBox(
               width: 100,

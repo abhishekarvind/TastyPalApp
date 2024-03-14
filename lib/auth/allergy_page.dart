@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:tastypal/homescreen.dart';
+import 'package:tastypal/auth/question_page.dart';
 import 'package:tastypal/utils/button.dart';
 import 'package:tastypal/utils/colors.dart';
 import 'package:tastypal/utils/textstyles.dart';
@@ -88,7 +88,7 @@ class _AllergyPageState extends State<AllergyPage> {
               CustomButton.button("Next", CustomColor.darkgreen(), Colors.white, () {
                 print(selectedValue);
                 addinfo();
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const QuestionPage()));
               })
 
             ],

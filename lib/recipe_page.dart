@@ -17,13 +17,14 @@ class RecipePage extends StatefulWidget {
 class _RecipePageState extends State<RecipePage> {
   String generated_content="";
   List<String> contentList = [];
+  Map<String, String> sections = {};
 
   Future<void> postdata()async{
     Map<String, dynamic> prompt={
       'prompt':'Act as a Indian chef ,When prompted with ingredients or the items present in kitchen . You should suggest food item that could be cooked with these ingredients'+widget.selected.toString()
           + 'in the below format\n'+'Title\n'
       'Description\n'
-      'Recipe'+'make the content short and easy to ready give it in a proper format and make the content short an precise'
+      'Recipe'+'make the content short and easy to ready give it in a proper format and make the content short and accurate'
     };
     http.Response response= await http.post(
       Uri.parse('http://192.168.1.7:5000/get_openai_response'),
@@ -41,8 +42,7 @@ class _RecipePageState extends State<RecipePage> {
       Map<String, dynamic> content = jsonDecode(getresponse.body);
       setState(() {
         generated_content=content['generated_content'];
-        contentList.addAll(generated_content.split('\n'));
-        print(contentList);
+        print(generated_content);
       });
     }
   }
@@ -51,8 +51,11 @@ class _RecipePageState extends State<RecipePage> {
     // TODO: implement initState
     super.initState();
     postdata();
-    contentList.addAll(generated_content.split('\n'));
   }
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -82,8 +85,6 @@ class _RecipePageState extends State<RecipePage> {
                       ],
                     )
                   )
-              
-              
                 ],
               ),
             ),

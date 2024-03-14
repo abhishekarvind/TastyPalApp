@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tastypal/auth/start_screen.dart';
+import 'package:tastypal/homescreen.dart';
 import 'package:tastypal/main_homescreen.dart';
 import 'package:tastypal/utils/colors.dart';
 import 'firebase_options.dart';
