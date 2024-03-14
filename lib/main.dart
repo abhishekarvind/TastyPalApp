@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: FirebaseAuth.instance.currentUser != null?const Mainhome():const GetStarted(),
+      home:FirebaseAuth.instance.currentUser != null?const Mainhome():const GetStarted(),
       theme: ThemeData(
         dialogBackgroundColor:  CustomColor.lightgreen(),
         scaffoldBackgroundColor: CustomColor.lightgreen(),
