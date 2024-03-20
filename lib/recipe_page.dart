@@ -74,13 +74,13 @@ class _RecipePageState extends State<RecipePage> {
                   SizedBox(height: AppMediaQuery.screenHeight(context)/40,),
                   Center(child: Image.asset('assets/cook.png',height: 180,)),
                   SizedBox(height: AppMediaQuery.screenHeight(context)/40,),
-                  Card(
+                  generated_content.isEmpty?Center(child: Image.asset("assets/loading.gif")):Card(
                     color: CustomColor.mildgreen(),
                     child: Column(
                       children: [
                         Padding(
                           padding: EdgeInsets.all(10),
-                          child: CustomTextStyles.subtext(generated_content,18.0,TextAlign.start),
+                          child: CustomTextStyles.subtext(generated_content+"\n\n",18.0,TextAlign.start),
                         ),
                       ],
                     )

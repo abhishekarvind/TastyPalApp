@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:tastypal/auth/edit_profile_page.dart';
+import 'package:tastypal/auth/login.dart';
 import 'package:tastypal/auth/start_screen.dart';
 import 'package:tastypal/utils/auth_methods.dart';
 import 'package:tastypal/utils/button.dart';
@@ -56,19 +58,15 @@ class _ProfilePageState extends State<ProfilePage> {
                     CustomTextStyles.head(
                         "Allergies", AppMediaQuery.textFactor(context) * 28),
                     Padding(padding:EdgeInsets.symmetric(horizontal: AppMediaQuery.screenWidth(context)/14) ,child: CustomTextStyles.subtext(snapshot.data['Allergies'], AppMediaQuery.textFactor(context)*22,TextAlign.start))
-                    ,const SizedBox(height: 200,),
+                    ,SizedBox(height: AppMediaQuery.screenHeight(context)/10,),
                     CustomButton.button('Edit Profile', CustomColor.darkgreen(), Colors.white, () {
                       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const EditProfile()));
-                
                     }),
-                    SizedBox(height: AppMediaQuery.screenHeight(context)/40,),
+                    SizedBox(height: AppMediaQuery.screenHeight(context)/60,),
                     CustomButton.button('Log out', const Color(0xffFF4545), Colors.white, () {
                       AuthMethods().signOut();
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const GetStarted()));
+                      PersistentNavBarNavigator.pushNewScreen(context, screen: LoginPage(),withNavBar: false);
                     }),
-                
-                
-                
                   ],
                 
                 ),

@@ -36,7 +36,16 @@ class _QuestionPageState extends State<QuestionPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: CustomColor.lightgreen(),
+          leading: GestureDetector(
+            onTap: (){
+              pageController.previousPage(duration: Duration(milliseconds: 400), curve: Curves.easeInOut);
+            },
+              child: Icon(Icons.arrow_back)),
+        ),
         body: PageView.builder(
+          physics: NeverScrollableScrollPhysics(),
           controller: pageController,
           itemCount: Question.data.length,
           itemBuilder: (context,index){
@@ -49,9 +58,9 @@ class _QuestionPageState extends State<QuestionPage> {
                 children: [
                   Center(
                     child: CustomTextStyles.head("Personal Information",
-                        AppMediaQuery.textFactor(context) * 28),
+                        AppMediaQuery.textFactor(context) * 24),
                   ),
-                  CustomTextStyles.subtext(data.question,22.0, TextAlign.start),
+                  CustomTextStyles.subtext(data.question,AppMediaQuery.textFactor(context) * 18.0, TextAlign.start),
                   SizedBox(
                     height: AppMediaQuery.screenHeight(context)/2,
                     child: ListView.builder(
@@ -78,7 +87,7 @@ class _QuestionPageState extends State<QuestionPage> {
                               ),
                                 child:Padding(
                                   padding: EdgeInsets.all(15),
-                                  child: CustomTextStyles.head(data2[index1],16.0,),
+                                  child: CustomTextStyles.head(data2[index1],AppMediaQuery.textFactor(context) * 16,),
 
                                 ),
                             ),

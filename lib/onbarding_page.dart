@@ -37,7 +37,14 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   Column(
                     children: [
                       Image.asset(onboarding().ob_data[index]["image"].toString(),height: 100,),
-                      CustomTextStyles.head(onboarding().ob_data[index]['title'].toString(),AppMediaQuery.textFactor(context)*20),
+                      Text(onboarding().ob_data[index]['title'],
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: AppMediaQuery.textFactor(context)*18,
+                          color: CustomColor.darkgreen()
+                        ),
+                      ),
                       CustomTextStyles.subtext(onboarding().ob_data[index]['content'].toString(), AppMediaQuery.textFactor(context)*16, TextAlign.center)
                     ],
                   ),
@@ -65,7 +72,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
               child: ElevatedButton(
                 onPressed: (){
                   if(currentindex!=3){
-                    pageController.nextPage(duration: const Duration(milliseconds: 400),
+                    pageController.nextPage(duration: const Duration(milliseconds: 600),
                         curve: Curves.easeIn);
                   }else{
                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const AllergyPage()));

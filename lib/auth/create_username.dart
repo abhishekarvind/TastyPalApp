@@ -3,8 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tastypal/auth/email_verification.dart';
-import 'package:tastypal/heatlybites/lib/community_page.dart';
-
 import '../utils/button.dart';
 import '../utils/colors.dart';
 import '../utils/responsive.dart';

@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:tastypal/heatlybites/lib/community_page.dart';
 import 'package:tastypal/main_homescreen.dart';
 import 'package:tastypal/utils/button.dart';
@@ -51,7 +53,7 @@ class _PostScreenState extends State<PostScreen> {
       'type':"general"
 
     }).whenComplete(() => Fluttertoast.showToast(msg: "Posted"));
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Mainhome()));
+    PersistentNavBarNavigator.pushNewScreen(context, screen: CommunityPage());
   }
 
   @override
@@ -62,86 +64,98 @@ class _PostScreenState extends State<PostScreen> {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal:AppMediaQuery.screenWidth(context)/35),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            CustomTextStyles.head(
-                "Create a post", AppMediaQuery.textFactor(context) * 28),
-            Form(
-              key: key,
-                child: Column(
-              children: [
-                TextFormField(
-                  controller: title,
-                  validator: (value){
-                    if(value!.isEmpty){
-                      return "Please fill";
-                    }
-                    return null;
-                  },
-                  onSaved: (value){
-                      title.text=value!;
-
-                  },
-                  decoration: InputDecoration(
-                    fillColor: CustomColor.mildgreen(),
-                    filled: true,
-
-                    hintText: 'Title',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
-                      borderSide: BorderSide.none
-                    )
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              CustomTextStyles.head(
+                  "Create a post", AppMediaQuery.textFactor(context) * 28),SizedBox(
+                height: AppMediaQuery.screenHeight(context)/30,
+              ),
+              ListView(
+                shrinkWrap: true,
+                physics: const PageScrollPhysics(),
+                children: [
+                  Form(
+                    key: key,
+                      child: Column(
+                    children: [
+                      TextFormField(
+                        textInputAction: TextInputAction.next,
+                        controller: title,
+                        validator: (value){
+                          if(value!.isEmpty){
+                            return "Please fill";
+                          }
+                          return null;
+                        },
+                        onSaved: (value){
+                            title.text=value!;
+                  
+                        },
+                        decoration: InputDecoration(
+                          fillColor: CustomColor.mildgreen(),
+                          filled: true,
+                  
+                          hintText: 'Title',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                            borderSide: BorderSide.none
+                          )
+                        ),
+                  
+                      ),
+                      SizedBox(
+                        height: AppMediaQuery.screenHeight(context)/30,
+                      ),
+                      TextFormField(
+                        textInputAction: TextInputAction.done,
+                        validator: (value){
+                          if(value!.isEmpty){
+                            return "Please fill";
+                          }
+                          return null;
+                        },
+                        onSaved: (value){
+                            description.text=value!;
+                        },
+                        controller: description,
+                        maxLines: 8,
+                        maxLength: 300,
+                        decoration: InputDecoration(
+                          fillColor: CustomColor.mildgreen(),
+                          filled: true,
+                          hintText: 'Description',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                            borderSide: BorderSide.none
+                          )
+                        ),
+                      ),
+                      SizedBox(
+                        height: AppMediaQuery.screenHeight(context)/30,
+                      ),
+                    ],
+                  )
                   ),
-
-                ),
-                SizedBox(
-                  height: AppMediaQuery.screenHeight(context)/30,
-                ),
-                TextFormField(
-                  validator: (value){
-                    if(value!.isEmpty){
-                      return "Please fill";
-                    }
-                    return null;
-                  },
-                  onSaved: (value){
-                      description.text=value!;
-                  },
-                  controller: description,
-                  maxLines: 8,
-                  maxLength: 300,
-                  decoration: InputDecoration(
-                    fillColor: CustomColor.mildgreen(),
-                    filled: true,
-                    hintText: 'Description',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
-                      borderSide: BorderSide.none
-                    )
-                  ),
-                ),
-                SizedBox(
-                  height: AppMediaQuery.screenHeight(context)/30,
-                ),
-              ],
-            )
-            ),
-
-
-            CustomButton.button('Post', CustomColor.darkgreen(), Colors.white, () {
-              if(key.currentState!.validate()){
-                createpost();
-              }
-            }),
-            SizedBox(
-              height: AppMediaQuery.screenHeight(context)/30,
-            ),
-
-
-
-          ],
+                ],
+              ),
+          
+          
+              CustomButton.button('Post', CustomColor.darkgreen(), Colors.white, () {
+                if(key.currentState!.validate()){
+                  createpost();
+                }
+              }),
+              SizedBox(
+                height: AppMediaQuery.screenHeight(context)/30,
+              ),
+          
+          
+          
+            ],
+          ),
         ),
       ),
     ));

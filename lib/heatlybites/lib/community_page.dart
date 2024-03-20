@@ -58,36 +58,35 @@ class _CommunityPageState extends State<CommunityPage> {
                     CustomTextStyles.head(
                         "Feeds", AppMediaQuery.textFactor(context) * 28),
                     SizedBox(height: AppMediaQuery.screenHeight(context)/40,),
-                    SizedBox(
-                      height: AppMediaQuery.screenHeight(context),
-                      child: ListView.builder(
-                        itemCount: snapshot.data.docs.length,
-                          itemBuilder: (BuildContext context,index){
-                          return Card(
-                            color: CustomColor.mildgreen(),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                            margin: const EdgeInsets.all(10),
-                            child: Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  CustomTextStyles.head(snapshot.data.docs[index]['title'].toString().toUpperCase(), 18.0),
-                                  SizedBox(height: AppMediaQuery.screenHeight(context)/50,),
-                                  CustomTextStyles.subtext(snapshot.data.docs[index]['description'], 16.0, TextAlign.start),
-                                  SizedBox(height: AppMediaQuery.screenHeight(context)/50,),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      CustomTextStyles.head("@"+snapshot.data.docs[index]['username'], 16.0),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            )
-                          );
-                          }),
-                    )
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: PageScrollPhysics(),
+                      itemCount: snapshot.data.docs.length,
+                        itemBuilder: (BuildContext context,index){
+                        return Card(
+                          color: CustomColor.mildgreen(),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                          margin: const EdgeInsets.all(10),
+                          child: Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CustomTextStyles.head(snapshot.data.docs[index]['title'].toString().toUpperCase(), 18.0),
+                                SizedBox(height: AppMediaQuery.screenHeight(context)/50,),
+                                CustomTextStyles.subtext(snapshot.data.docs[index]['description'], 16.0, TextAlign.start),
+                                SizedBox(height: AppMediaQuery.screenHeight(context)/50,),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    CustomTextStyles.head("@"+snapshot.data.docs[index]['username'], 16.0),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          )
+                        );
+                        })
 
                   ],
                 ),

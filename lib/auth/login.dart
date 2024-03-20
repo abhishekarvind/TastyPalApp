@@ -44,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               CustomTextStyles.head("Login",
-                  AppMediaQuery.textFactor(context) * 28),
+                  AppMediaQuery.textFactor(context) * 24),
               SizedBox(
                 height: AppMediaQuery.screenHeight(context) / 40,
               ),

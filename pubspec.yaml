@@ -50,6 +50,7 @@ dependencies:
   google_nav_bar: ^5.0.6
   shared_preferences: ^2.2.2
   persistent_bottom_nav_bar: ^5.0.2
+  csv: ^6.0.0
 
 
 
