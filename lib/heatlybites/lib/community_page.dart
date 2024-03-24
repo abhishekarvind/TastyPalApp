@@ -17,7 +17,17 @@ class CommunityPage extends StatefulWidget {
 }
 
 class _CommunityPageState extends State<CommunityPage> {
-  int like=0;
+  int likeCount = 0;
+  bool isLiked = false;
+  Future<void> _updateLikeCount(DocumentSnapshot index) async {
+    try {
+      FirebaseFirestore.instance.collection('posts').doc(index.id).update({
+        'likeCount': likeCount,
+      });
+    } catch (e) {
+      print('Error updating like count: $e');
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -45,7 +55,7 @@ class _CommunityPageState extends State<CommunityPage> {
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal:AppMediaQuery.screenWidth(context)/35),
           child: StreamBuilder(
-            stream:  FirebaseFirestore.instance.collection('posts').snapshots(),
+            stream:  FirebaseFirestore.instance.collection('posts').orderBy('date',descending: true).snapshots(),
             builder: (context,AsyncSnapshot snapshot) {
               if(snapshot.hasError||!snapshot.hasData){
                 return Center(
@@ -63,7 +73,7 @@ class _CommunityPageState extends State<CommunityPage> {
                       physics: PageScrollPhysics(),
                       itemCount: snapshot.data.docs.length,
                         itemBuilder: (BuildContext context,index){
-                        return Card(
+                        return  Card(
                           color: CustomColor.mildgreen(),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                           margin: const EdgeInsets.all(10),
@@ -72,19 +82,46 @@ class _CommunityPageState extends State<CommunityPage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                CustomTextStyles.head(snapshot.data.docs[index]['title'].toString().toUpperCase(), 18.0),
-                                SizedBox(height: AppMediaQuery.screenHeight(context)/50,),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    CustomTextStyles.head(snapshot.data.docs[index]['title'].toString().toUpperCase(), 18.0),
+
+                                  ],
+                                ),
+                                SizedBox(height: AppMediaQuery.screenHeight(context) / 50),
                                 CustomTextStyles.subtext(snapshot.data.docs[index]['description'], 16.0, TextAlign.start),
-                                SizedBox(height: AppMediaQuery.screenHeight(context)/50,),
+                                SizedBox(height: AppMediaQuery.screenHeight(context) / 50),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     CustomTextStyles.head("@"+snapshot.data.docs[index]['username'], 16.0),
+                                    Row(
+                                      children: [
+                                        IconButton(
+                                          icon: Icon(
+                                            snapshot.data.docs[index]['likeCount']>0? Icons.favorite : Icons.favorite_border,
+                                            color: snapshot.data.docs[index]['likeCount']>0 ? Colors.red : null,
+                                          ),
+                                          onPressed: () {
+                                            setState(() {
+                                              isLiked = !isLiked;
+                                              likeCount += isLiked ? 1 : -1;
+                                              _updateLikeCount(snapshot.data.docs[index]);
+                                            });
+                                          },
+                                        ),
+                                        Text(
+                                          snapshot.data.docs[index]['likeCount'].toString(),
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                      ],
+                                    ),
                                   ],
                                 ),
                               ],
                             ),
-                          )
+                          ),
                         );
                         })
 

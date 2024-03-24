@@ -49,8 +49,8 @@ class _PostScreenState extends State<PostScreen> {
       'user_id':user,
       'title':title.text.trim(),
       'description':description.text.trim(),
-      'date':date.hour+date.minute,
-      'type':"general"
+      'date':date.minute,
+      'likeCount': 0
 
     }).whenComplete(() => Fluttertoast.showToast(msg: "Posted"));
     PersistentNavBarNavigator.pushNewScreen(context, screen: CommunityPage());

@@ -1,10 +1,10 @@
 import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:tastypal/recommendation_info_page.dart';
 import 'package:tastypal/select_page.dart';
 import 'package:tastypal/utils/colors.dart';
 import 'package:tastypal/utils/recommendation_item_model.dart';
@@ -45,8 +45,9 @@ class _HomeScreenState extends State<HomeScreen> {
   List<String> dishes = [];
 
   String user_preferences = "";
+  String user_allergies="";
 
-  Future<void> recommend_model(String user_preferences) async {
+  Future<void> recommend_model(String user_preferences,String user_allergies) async {
     http.Client client = http.Client();
 
     try {
@@ -54,9 +55,9 @@ class _HomeScreenState extends State<HomeScreen> {
         'prompt': 'Act as a recommendation model you have to give only the dish name and the dish name should be selected from the question asked here is the questions What is your favorite cuisine?,Do you have any dietary restrictions or preferences?,How do you feel about spicy food?,'
                 'What type of meal are you looking for?,What is your budget range for a meal?,Are you aiming for healthy food options? and the response  given are' +
             user_preferences +
-            'make sure the answer should be within the give list of dishes' +
+            'make sure the answer should be within the give list of dishes and is not allegic to user and the user is to'+user_allergies +
             RecommendationModel.dish.toString() +
-            'and the response should be in a array list suggest me only 5 dish'
+            'and the response should be in a array list suggest me only 10 dish'
       };
       http.Response response = await client.post(
         Uri.parse('http://192.168.1.7:5000/get_openai_response'),
@@ -81,8 +82,6 @@ class _HomeScreenState extends State<HomeScreen> {
         print('Failed to post response: ${response.statusCode}');
       }
     } finally {
-      // Dispose of the client to release resources
-      client.close();
     }
   }
 
@@ -91,7 +90,8 @@ class _HomeScreenState extends State<HomeScreen> {
         await FirebaseFirestore.instance.collection('users').doc(user).get();
     setState(() {
       user_preferences = documentSnapshot.get('user_preferences');
-      recommend_model(user_preferences).then((_) {
+      user_allergies = documentSnapshot.get('Allergies');
+      recommend_model(user_preferences,user_allergies).then((_) {
         setState(() {
           dishes = generated_text
               .split('\n')
@@ -108,36 +108,41 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget? itemcard(String item) {
     for (RecommendationModel data in food_data) {
       if (item == data.item) {
-        return Card(
-          color: CustomColor.mildgreen(),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                    height: 60,
-                    width: 60,
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.circular(100),
-                        child: Image.network(
-                          data.image,
-                          fit: BoxFit.fitWidth,
-                        ))),
-                SizedBox(
-                  width: AppMediaQuery.screenWidth(context) / 1.5,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomTextStyles.head(data.item, 16),
-                      CustomTextStyles.subtext(
-                          data.description, 14.0, TextAlign.start)
-                    ],
-                  ),
-                )
-              ],
+        return GestureDetector(
+          onTap: (){
+            PersistentNavBarNavigator.pushNewScreen(context, screen: RecommendationInfo(name: data.item,description: data.description,image: data.image,));
+          },
+          child: Card(
+            color: CustomColor.mildgreen(),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                      height: 60,
+                      width: 60,
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(100),
+                          child: Image.network(
+                            data.image,
+                            fit: BoxFit.fitWidth,
+                          ))),
+                  SizedBox(
+                    width: AppMediaQuery.screenWidth(context) / 1.5,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomTextStyles.head(data.item, 16),
+                        CustomTextStyles.subtext(
+                            data.description, 14.0, TextAlign.start)
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         );

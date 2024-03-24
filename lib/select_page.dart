@@ -20,7 +20,7 @@ class _SelectPageState extends State<SelectPage> {
     "Tomatoes",
     "Onions",
     "Potato",
-    "Olive oil",
+    "Oil",
     "Flour",
     "Spinach",
     "Milk"
